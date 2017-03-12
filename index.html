@@ -54,7 +54,7 @@
         element.addEventListener('click', fullscreen, false);
 
         canvas = document.getElementById('tempCanvas');
-        canvas.width = 512;
+        canvas.width = 288;
         canvas.height = 288;
         canvas.width = nextPowerOf2(canvas.width);
         canvas.height = nextPowerOf2(canvas.height);
@@ -90,7 +90,7 @@
             texture.needsUpdate = true;
           }
 
-          piImage.src = "http://192.168.0.12/picam/cam_pic.php?time=" + new Date().getTime();
+          piImage.src = "http://10.19.84.170/picam/cam_pic.php?time=" + new Date().getTime();
         }
 
         requestAnimationFrame(animate);
