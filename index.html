@@ -77,8 +77,17 @@
         scene.add(cameraMesh);
 
         animate();
-      }
-       function setOrientationControls(e) {
+        // Our initial control fallback with mouse/touch events in case DeviceOrientation is not enabled
+        controls = new THREE.OrbitControls(camera, element);
+        controls.target.set(
+          camera.position.x + 0.15,
+          camera.position.y,
+          camera.position.z
+        );
+        controls.noPan = true;
+        controls.noZoom = true;
+        // Our preferred controls via DeviceOrientation
+        function setOrientationControls(e) {
           if (!e.alpha) {
             return;
           }
@@ -87,8 +96,8 @@
           controls.update();
           element.addEventListener('click', fullscreen, false);
           window.removeEventListener('deviceorientation', setOrientationControls, true);
-        }
-        window.addEventListener('deviceorientation', setOrientationControls, true);
+      }
+       
       function animate() {
         if (context) {
           var piImage = new Image();
