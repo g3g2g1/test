@@ -68,25 +68,14 @@
 				geometry.scale( - 1, 1, 1 );
 
 				var Image = new Image();
-				Image.onload = function() {
-					console.log('Drawing image');
-					context.drawImage(Image, 0, 0, canvas.width, canvas.height);
-					texture.needsUpdate = true;
-				}
+				
 				Image.src = "http://192.168.0.115/picam/cam_pic.php?time=" + new Date().getTime();
 				
-				canvas = document.getElementById('tempCanvas');
-                                canvas.width =512;
-                                canvas.height = 512;
-                                canvas.width = nextPowerOf2(canvas.width);
-                                canvas.height = nextPowerOf2(canvas.height);
-                                function nextPowerOf2(x) { 
-                                        return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2)));
-                                }
 				
-				context = canvas.getContext('2d');
-				var texture = new THREE.Texture( canvas );
-				texture.context = context;
+				
+				
+				var texture = new THREE.Texture( Image );
+				
 				texture.minFilter = THREE.LinearFilter;
 				texture.format = THREE.RGBFormat;
 
