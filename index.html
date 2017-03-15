@@ -36,6 +36,7 @@
 		<script>
 
 			var camera, scene, renderer;
+			var canvas, context;
 
 			var texture_placeholder,
 			isUserInteracting = false,
@@ -66,16 +67,26 @@
 				var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
 				geometry.scale( - 1, 1, 1 );
 
-				var video = document.createElement( 'video' );
-				video.width = 640;
-				video.height = 360;
-				video.loop = true;
-				video.muted = true;
-				video.src = "http://192.168.0.115/picam/cam_pic.php?time=" + new Date().getTime();
-				video.setAttribute( 'webkit-playsinline', 'webkit-playsinline' );
-				video.play();
-
-				var texture = new THREE.VideoTexture( video );
+				var Image = new Image();
+				Image.onload = function() {
+					console.log('Drawing image');
+					context.drawImage(Image, 0, 0, canvas.width, canvas.height);
+					texture.needsUpdate = true;
+				}
+				Image.src = "http://192.168.0.115/picam/cam_pic.php?time=" + new Date().getTime();
+				
+				canvas = document.getElementById('tempCanvas');
+                                canvas.width =512;
+                                canvas.height = 512;
+                                canvas.width = nextPowerOf2(canvas.width);
+                                canvas.height = nextPowerOf2(canvas.height);
+                                function nextPowerOf2(x) { 
+                                        return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2)));
+                                }
+				
+				context = canvas.getContext('2d');
+				var texture = new THREE.Texture( canvas );
+				texture.context = context;
 				texture.minFilter = THREE.LinearFilter;
 				texture.format = THREE.RGBFormat;
 
