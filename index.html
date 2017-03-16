@@ -69,8 +69,17 @@
         }
 
         context = canvas.getContext('2d');
-        texture = new THREE.Texture(canvas);
+        //texture = new THREE.Texture(canvas);
+        //texture.context = context;
+        
+        var texture = new THREE.Texture(canvas);
         texture.context = context;
+        var material = new THREE.MeshBasicMaterial({ map: texture });
+        //var geometry = new THREE.BoxGeometry( 200, 200, 200 );
+        var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+				geometry.scale( - 1, 1, 1 );
+        mesh = new THREE.Mesh( geometry, material );
+        scene.add( mesh );
 
         var cameraPlane = new THREE.PlaneGeometry(512, 512);
         //var sphere = new THREE.SphereGeometry( 500, 64,64);
