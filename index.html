@@ -71,12 +71,12 @@
             return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2)));
         }
 
-        context = canvas.getContext('2d');
-        texture = new THREE.Texture(canvas);
-        texture.context = context;
-        
+        //context = canvas.getContext('2d');
         //texture = new THREE.Texture(canvas);
         //texture.context = context;
+        
+        texture = new THREE.Texture(PiImage);
+        texture.context = context;
         var material = new THREE.MeshBasicMaterial({ map: texture });
         
         //var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
