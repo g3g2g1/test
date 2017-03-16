@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Pi Viewer</title>
+    <title>Pi VR</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <style>
@@ -39,6 +39,7 @@
           effect,
           canvas,
           controls,
+	  texture,
           context;
 
       init();
@@ -62,8 +63,8 @@
         element.addEventListener('click', fullscreen, false);
 
         canvas = document.getElementById('tempCanvas');
-        canvas.width = 288;
-        canvas.height = 288;
+        canvas.width = 512;
+        canvas.height = 512;
         canvas.width = nextPowerOf2(canvas.width);
         canvas.height = nextPowerOf2(canvas.height);
 
@@ -71,11 +72,11 @@
             return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2)));
         }
 
-        context = canvas.getContext('2d');
+        //context = canvas.getContext('2d');
         //texture = new THREE.Texture(canvas);
         //texture.context = context;
         
-        var texture = new THREE.Texture(canvas);
+        texture = new THREE.Texture(canvas);
         texture.context = context;
         var material = new THREE.MeshBasicMaterial({ map: texture });
         
