@@ -39,7 +39,6 @@
           effect,
           canvas,
           controls,
-	  texture,
           context;
 
       init();
@@ -82,7 +81,7 @@
         
         //var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
 	var geometry = new THREE.SphereBufferGeometry( 100, 0, 0 );
-				geometry.scale( - 1, 1, 1 );
+	geometry.scale( - 1, 1, 1 );
         mesh = new THREE.Mesh( geometry, material );
         scene.add( mesh );
 
