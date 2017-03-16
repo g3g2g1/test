@@ -23,8 +23,12 @@
     <div id="webglviewer"></div>
     <canvas id="tempCanvas"></canvas>
 
+    
     <script src="./js/three.min.js"></script>
     <script src="./js/StereoEffect.js"></script>
+    <script src="./js/DeviceOrientationControls.js"></script>
+    <script src="./js/OrbitControls.js"></script>
+    <script src="./js/helvetiker_regular.typeface.js"></script>
 
     <script>
       var scene,
@@ -55,22 +59,18 @@
         element.addEventListener('click', fullscreen, false);
 
         canvas = document.getElementById('tempCanvas');
-        canvas.width =512;
-        canvas.height = 512;
+        canvas.width = 288;
+        canvas.height = 288;
         canvas.width = nextPowerOf2(canvas.width);
         canvas.height = nextPowerOf2(canvas.height);
 
         function nextPowerOf2(x) { 
             return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2)));
         }
-	      var texture = new THREE.Texture(canvas);
-              var material = new THREE.MeshBasicMaterial({ map: texture });
-              var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
-				geometry.scale( - 1, 1, 1 );
-              mesh = new THREE.Mesh( geometry, material );
-              scene.add( mesh );
 
-
+        context = canvas.getContext('2d');
+        texture = new THREE.Texture(canvas);
+        texture.context = context;
 
         var cameraPlane = new THREE.PlaneGeometry(512, 512);
         //var sphere = new THREE.SphereGeometry( 500, 64,64);
@@ -117,7 +117,7 @@
             texture.needsUpdate = true;
           }
 
-          piImage.src = "http://192.168.0.115/picam/cam_pic.php?time=" + new Date().getTime();
+          piImage.src = "http://10.19.84.170/picam/cam_pic.php?time=" + new Date().getTime();
         }
 
         requestAnimationFrame(animate);
