@@ -72,15 +72,16 @@
             return Math.pow(2, Math.ceil(Math.log(x) / Math.log(2)));
         }
 
-        //context = canvas.getContext('2d');
-        //texture = new THREE.Texture(canvas);
-        //texture.context = context;
-        
+        context = canvas.getContext('2d');
         texture = new THREE.Texture(canvas);
         texture.context = context;
+        
+        //texture = new THREE.Texture(canvas);
+        //texture.context = context;
         var material = new THREE.MeshBasicMaterial({ map: texture });
         
-        var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+        //var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+	var geometry = new THREE.SphereBufferGeometry( 100, 0, 0 );
 				geometry.scale( - 1, 1, 1 );
         mesh = new THREE.Mesh( geometry, material );
         scene.add( mesh );
@@ -91,7 +92,8 @@
         cameraMesh = new THREE.Mesh(cameraPlane, new THREE.MeshBasicMaterial({
           color: 0xffffff, opacity: 1, map: texture
         }));
-        cameraMesh.position.z = -200;
+        //cameraMesh.position.z = -200;
+	cameraMesh.position.z = -2;
 
         scene.add(cameraMesh);
 
